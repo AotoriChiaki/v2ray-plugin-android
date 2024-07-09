@@ -16,7 +16,7 @@ val currentFlavor get() = gradle.startParameter.taskRequests.toString().let { ta
 }
 
 android {
-    ndkVersion = "26.2.11394342"
+    ndkVersion = "26.3.11579264"
     namespace = "com.github.shadowsocks.plugin.v2ray"
     val javaVersion = JavaVersion.VERSION_17
     compileSdk = 34
