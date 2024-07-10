@@ -1,14 +1,16 @@
-version: 2
+version: 2.1
 jobs:
   build:
     working_directory: ~/code
     docker:
-      - image: cimg/android:2024.07.1-ndk
+      - image: aotorichiaki/aotorichiaki:android-ndk26-go1.21
     environment:
-      JVM_OPTS: -Xmx3500m
-      GRADLE_OPTS: -Dorg.gradle.workers.max=1 -Dorg.gradle.daemon=false -Dkotlin.compiler.execution.strategy="in-process"
+      JVM_OPTS: -Xmx7000m
+      GRADLE_OPTS: -Dorg.gradle.workers.max=4 -Dorg.gradle.daemon=false -Dkotlin.compiler.execution.strategy="in-process"
     steps:
       - checkout
+      - run: echo 'export PATH=/usr/local/go/bin/:${PATH}' >> $BASH_ENV
+      - run: go version
       - run: git submodule update --init --recursive
       - run: ./gradlew androidDependencies
       - restore_cache:
